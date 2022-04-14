@@ -10,6 +10,10 @@ Get-ChildItem -Force -Recurse -File | Where Length -gt 100MB | Sort Length -Desc
 
 Get-Service | Where-Object {$_.Status -eq "Running"}
 
+Get-Service *spool*
+
+Get-Service -ComputerName Computer1
+
 Get-EventLog -LogName System -Newest 10
 
 Get-WmiObject -Class Win32_OperatingSystem
@@ -24,6 +28,9 @@ Get-WmiObject -Class Win32_OperatingSystem
 Enter-PSSession Computer1
 
 Invoke-Command -ComputerName Computer1, Computer2, Computer3, -ScriptBlock {Get-Process}
+
+Get-VM -ComputerName Computer1
+
 
 
 $session = New-PSSession -ComputerName Computer1, Computer2
