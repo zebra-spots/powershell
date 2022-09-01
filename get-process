@@ -1,0 +1,9 @@
+get-process | sort-object -Property ID, Name
+
+get-process 'powershell' | sort-object -Property @{Expression = "Name"; Descending = $True}, @{Expression = "CPU"; Descending = $False}
+
+get-process | where company -notlike *microsoft* | ft name, company, ID, processname -autosize
+
+
+
+get-process| sort-object -Property ID | where company -notlike *microsoft* | ft name, company, ID, processname -autosize
