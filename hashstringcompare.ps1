@@ -1,4 +1,8 @@
-# Must be done from directory with file and publishedhash must be changed manually before running
+# Must be done from directory with file to be checked (or put absolute path instead of just filename) and publishedhash must be changed manually to the hash to be compared before running
+
+# TODO: Ask for user input for $FileHash with Read-Host -Prompt 'Input file to be hashed (full path)'
+# TODO: Ask for user input for $publishedHash with Read-Host -Prompt 'Input hash to compare file to'
+
 
 $FileHash = (Get-FileHash 2022-07-01-raspios-bullseye-i386.iso).Hash
 $FileHash
