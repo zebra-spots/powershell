@@ -1,0 +1,34 @@
+"""
+Diagnose problems on exchange with exchange management shell
+"""
+Test-ServiceHealth
+
+Get-MailboxDatabaseCopyStatus
+
+
+"""
+Get a CSV of all users that have not logged in for two years
+"""
+$Date = (get-date).adddays(-730)
+$filteredusers = Get-mailbox -server <SERVERNAME> | Get-mailboxstatistics | where-object { ($_.lastlogontime -lt $Date) -and ($_.lastlogontime -gt 0) } | 
+$usersless = $filteredusers | Select-object -Property DisplayName,LastLogonTime | Export-csv C:\temp\usersless.csv
+
+
+"""
+Remove a single user
+"""
+Remove-Mailbox -Identity "<USER_DisplayName>" -Permanent $true
+
+
+"""
+Test reading the CSV
+"""
+Import-Csv "C:\temp\usersless.csv" | ForEach-Object {
+	Get-Mailbox -Identity $_.DisplayName}
+
+
+"""
+Use CSV to bulk remove users
+"""
+Import-Csv "C:\temp\usersless.csv" | ForEach-Object {
+	Remove-Mailbox -Identity $_.DisplayName -confirm:$false}
