@@ -6,4 +6,4 @@ get-process | where company -notlike *microsoft* | ft name, company, ID, process
 
 
 
-get-process| sort-object -Property ID | where company -notlike *microsoft* | ft name, company, ID, processname -autosize
+get-process | sort-object -Property ID | where company -notlike *microsoft* | ft name, company, ID, processname -autosize
