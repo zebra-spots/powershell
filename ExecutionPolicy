@@ -1,0 +1,11 @@
+# List the current execution policy
+Get-ExecutionPolicy -list
+
+# Allows scripts to run in this powershell session only
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+
+# Returning execution policy to default
+Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope Process
+
+# Gets the execution policy object from a remote computer and sets the policy on the local computer
+Invoke-Command -ComputerName Server01 -ScriptBlock { Get-ExecutionPolicy } | Set-ExecutionPolicy
